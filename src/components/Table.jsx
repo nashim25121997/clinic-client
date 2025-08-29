@@ -1,4 +1,4 @@
-export default function Table({ columns = [], data = [], onEdit, onDelete }) {
+export default function Table({ columns = [], data = [], onEdit, onDelete, onView }) {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full border bg-white rounded-2xl overflow-hidden">
@@ -20,6 +20,7 @@ export default function Table({ columns = [], data = [], onEdit, onDelete }) {
                 <td className="px-4 py-2 text-sm flex gap-2">
                   {onEdit && <button className="btn btn-secondary" onClick={() => onEdit(row)}>Edit</button>}
                   {onDelete && <button className="btn bg-rose-600 text-white" onClick={() => onDelete(row)}>Delete</button>}
+                  {onView && <button className="btn btn-primary" onClick={() => onView(row)}>View</button>}
                 </td>
               )}
             </tr>

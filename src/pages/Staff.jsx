@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../api";
 import Table from "../components/Table.jsx";
 import { Card, FormField } from "../components/FormWrap.jsx";
+import Loader from "../components/ui/Loader";
 
 const emptyForm = { name: "", role: "", phone: "", email: "" };
 
@@ -9,8 +10,9 @@ export default function Staff() {
   const [items, setItems] = useState([]);
   const [form, setForm] = useState(emptyForm);
   const [editing, setEditing] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const fetchItems = () => api.get("/staff").then((res) => setItems(res.data));
+  const fetchItems = () => api.get("/staff").then((res) => setItems(res.data), setLoading(false));
   useEffect(() => {
     fetchItems();
   }, []);
@@ -33,6 +35,7 @@ export default function Staff() {
   };
 
   return (
+    loading ? <Loader /> :
     <div className="grid md:grid-cols-3 gap-6">
       <div className="md:col-span-2">
         <Card title="Staff">

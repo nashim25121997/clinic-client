@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import api from "../api";
+import Loader from "../components/ui/Loader";
 
 export default function Dashboard() {
   const [counts, setCounts] = useState({ patients: 0, doctors: 0, staff: 0, appointments: 0, cases: 0 });
+  const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
     Promise.all([
       api.get("/patients"),
@@ -18,6 +21,7 @@ export default function Dashboard() {
         appointments: a.data.length,
         cases: c.data.length,
       });
+      setLoading(false);
     }).catch(console.error);
   }, []);
 
@@ -30,6 +34,7 @@ export default function Dashboard() {
   ];
 
   return (
+    loading ? <Loader /> :
     <div className="grid md:grid-cols-5 gap-4">
       {cards.map((c) => (
         <div key={c.label} className="card text-center">

@@ -7,7 +7,7 @@ export function FormField({ label, children }) {
   );
 }
 
-export function Card({ title, children, actions }) {
+export function Card({ title, children, actions, className }) {
   return (
     <div className="card">
       <div className="flex items-center justify-between mb-4">

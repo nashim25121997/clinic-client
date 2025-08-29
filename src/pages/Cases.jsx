@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import api from "../api";
 import Table from "../components/Table.jsx";
 import { Card, FormField } from "../components/FormWrap.jsx";
+import Loader from "../components/ui/Loader";
+
 
 const emptyForm = {
   patient: "",
@@ -19,6 +21,7 @@ export default function Cases() {
   const [doctors, setDoctors] = useState([]);
   const [form, setForm] = useState(emptyForm);
   const [editing, setEditing] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const fetchAll = () =>
     Promise.all([
@@ -29,6 +32,7 @@ export default function Cases() {
       setItems(a.data);
       setPatients(p.data);
       setDoctors(d.data);
+      setLoading(false);
     });
 
   useEffect(() => {
@@ -65,6 +69,7 @@ export default function Cases() {
   };
 
   return (
+    loading ? <Loader /> :
     <div className="grid md:grid-cols-3 gap-6">
       <div className="md:col-span-2">
         <Card title="Cases">
