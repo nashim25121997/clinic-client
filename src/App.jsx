@@ -6,6 +6,7 @@ import Staff from "./pages/Staff.jsx";
 import Appointments from "./pages/Appointments.jsx";
 import Cases from "./pages/Cases.jsx";
 import Logo from "./assets/images/logo.png";
+import PatientDetails from "./pages/PatientDetails.jsx";
 
 const navLinkClass = ({ isActive }) =>
   `px-3 py-2 rounded-xl ${isActive ? "bg-indigo-600 text-white" : "text-black-600 hover:bg-slate-200"}`;
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/staff" element={<Staff />} />
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/cases" element={<Cases />} />
+          <Route path="/patients/:id" element={<PatientDetails />} />
         </Routes>
       </main>
     </div>

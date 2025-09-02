@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api";
 import Table from "../components/Table.jsx";
 import { Card, FormField } from "../components/FormWrap.jsx";
@@ -14,12 +15,13 @@ const emptyForm = {
   address: "",
   medicalHistory: "",
 };
-
 export default function Patients() {
+  const navigate = useNavigate();
   const [items, setItems] = useState([]);
   const [form, setForm] = useState(emptyForm);
   const [editing, setEditing] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   const fetchItems = () => {
     api
@@ -48,8 +50,19 @@ export default function Patients() {
     await api.delete(`/patients/${row._id}`);
     fetchItems();
   };
+
   const onView = (row) => {
-    console.log("View patient:", row);
+    navigate(`/patients/${row._id}`);
+  };
+
+  const searchItems = (val) => {
+    setLoading(true);
+    setSearch(val);
+    const lowerVal = val.toLowerCase();
+    api
+      .get(`/patients?search=${lowerVal}`)
+      .then((res) => setItems(res.data || []), setLoading(false))
+      .catch((err) => console.error("Error fetching patients:", err));
   };
 
   return loading ? (
@@ -60,6 +73,13 @@ export default function Patients() {
         <div className="card !bg-blue-100">
           <div className="flex items-center justify-between mb-4">
             <h2 className="title">Patients</h2>
+            <input
+              type="text"
+              placeholder="Search patients..."
+              className="input !w-[300px] border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              value={search}
+              onChange={(e) => searchItems(e.target.value)}
+            />
           </div>
           <Table
             columns={[
