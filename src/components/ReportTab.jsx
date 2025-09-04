@@ -41,6 +41,13 @@ export default function ReportsTab() {
 
   return (
     <div className="p-4 space-y-4">
+      {/* Upload Button */}
+      <button
+        onClick={() => setShowUploadModal(true)}
+        className="btn btn-primary flex items-center gap-2 float-right mb-2"
+      >
+        <FaUpload /> Upload File
+      </button>
       {/* Files Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4">
         {files.map((file) => (
@@ -66,17 +73,9 @@ export default function ReportsTab() {
         ))}
       </div>
 
-      {/* Upload Button */}
-      <button
-        onClick={() => setShowUploadModal(true)}
-        className="btn btn-primary flex items-center gap-2"
-      >
-        <FaUpload /> Upload File
-      </button>
-
       {/* Upload Modal */}
       {showUploadModal && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 !mt-0">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
             <h2 className="text-lg font-semibold mb-4">Upload Report</h2>
 
@@ -109,10 +108,7 @@ export default function ReportsTab() {
 
             {/* Actions */}
             <div className="mt-4 flex justify-end gap-2">
-              <button
-                className="btn"
-                onClick={() => setShowUploadModal(false)}
-              >
+              <button className="btn" onClick={() => setShowUploadModal(false)}>
                 Cancel
               </button>
               <button

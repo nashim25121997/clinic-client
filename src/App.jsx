@@ -9,26 +9,44 @@ import Logo from "./assets/images/logo.png";
 import PatientDetails from "./pages/PatientDetails.jsx";
 
 const navLinkClass = ({ isActive }) =>
-  `px-3 py-2 rounded-xl ${isActive ? "bg-indigo-600 text-white" : "text-black-600 hover:bg-slate-200"}`;
+  `px-3 py-2 rounded-xl ${
+    isActive ? "bg-indigo-600 text-white" : "text-black-600 hover:bg-slate-200"
+  }`;
 
 export default function App() {
   return (
-    <div className="min-h-screen">
-      <header className="bg-[#1CA4AC] border-b">
-        <div className=" mx-auto px-4 py-4 flex items-center gap-6">
-          <Link to="/" className="text-xl font-bold"><img src={Logo} width="150px"/></Link>
+    <div className="min-h-screen flex flex-col">
+      {/* Fixed Header */}
+      <header className="bg-[#1CA4AC] border-b fixed top-0 left-0 right-0 z-50">
+        <div className="mx-auto px-4 py-4 flex items-center gap-6">
+          <Link to="/" className="text-xl font-bold">
+            <img src={Logo} width="150px" alt="Logo" />
+          </Link>
           <nav className="flex gap-2">
-            <NavLink to="/" className={navLinkClass} end>Dashboard</NavLink>
-            <NavLink to="/patients" className={navLinkClass}>Patients</NavLink>
-            <NavLink to="/doctors" className={navLinkClass}>Doctors</NavLink>
-            <NavLink to="/staff" className={navLinkClass}>Staff</NavLink>
-            <NavLink to="/appointments" className={navLinkClass}>Appointments</NavLink>
-            <NavLink to="/cases" className={navLinkClass}>Cases</NavLink>
+            <NavLink to="/" className={navLinkClass} end>
+              Dashboard
+            </NavLink>
+            <NavLink to="/patients" className={navLinkClass}>
+              Patients
+            </NavLink>
+            <NavLink to="/doctors" className={navLinkClass}>
+              Doctors
+            </NavLink>
+            <NavLink to="/staff" className={navLinkClass}>
+              Staff
+            </NavLink>
+            <NavLink to="/appointments" className={navLinkClass}>
+              Appointments
+            </NavLink>
+            <NavLink to="/cases" className={navLinkClass}>
+              Cases
+            </NavLink>
           </nav>
         </div>
       </header>
 
-      <main className="mx-auto px-4 py-6 min-h-[calc(100vh-96px)]">
+      {/* Scrollable content below header */}
+      <main className="flex-1 mt-[88px] px-4 py-6 overflow-y-auto">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/patients" element={<Patients />} />
