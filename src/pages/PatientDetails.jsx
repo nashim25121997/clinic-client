@@ -6,6 +6,9 @@ import Loader from "../components/ui/Loader";
 import { useParams } from "react-router-dom";
 import CasesAccordion from "../components/CaseAccordian.jsx";
 import ReportsTab from "../components/ReportTab.jsx";
+import ScanningTab from "../components/ScanningTab.jsx";
+import PrescriptionsTab from "../components/PrescriptionTab.jsx";
+import HistoryTab from "../components/HistoryTab.jsx";
 
 const emptyForm = {
   patient: "",
@@ -121,7 +124,7 @@ export default function PatientDetails() {
           <path d="M4 4h16v2H4V4zm0 14h16v2H4v-2zm2-7h12v2H6v-2z" />
         </svg>
       ),
-      content: <div className="p-4">🖨️ Scanning content goes here</div>,
+      content: <div className="p-4"><ScanningTab/></div>,
     },
     {
       name: "Prescriptions",
@@ -135,7 +138,7 @@ export default function PatientDetails() {
           <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 15h-2v-2H9v-2h2V9h2v2h2v2h-2Z" />
         </svg>
       ),
-      content: <div className="p-4">💊 Prescriptions content goes here</div>,
+      content: <div className="p-4"><PrescriptionsTab/></div>,
     },
     {
       name: "History",
@@ -149,7 +152,7 @@ export default function PatientDetails() {
           <path d="M13 3a9 9 0 1 0 8.485 6.486l-2.032-.527A7 7 0 1 1 12 5V2.05A9.001 9.001 0 0 0 13 3Zm-1 5v5l4.243 2.536 1.028-1.714L13 11V8h-1Z" />
         </svg>
       ),
-      content: <div className="p-4">📜 History content goes here</div>,
+      content: <div className="p-4"><HistoryTab/></div>,
     },
   ];
 
